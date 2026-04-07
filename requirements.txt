@@ -8,3 +8,5 @@ seaborn
 streamlit
 plotly
 arch
+dash
+dash-bootstrap-components
