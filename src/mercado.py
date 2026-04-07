@@ -229,6 +229,9 @@ class Mercado:
         self.news = 0
         self.historico_news = []
         self.dia_atual = 0
+        self.total_compras_dia = 0
+        self.total_vendas_dia  = 0
+        self.dividendo_dia     = 0.0
         # Configura o Pool de processos. O número de processos pode ser ajustado.
         
 
@@ -456,7 +459,14 @@ class Mercado:
         # O casamento de ordens é inerentemente sequencial
         #print("[Mercado] Executando ordens...")
         self.order_book.executar_ordens("FII", self) # Passa o mercado para que a transação possa atualizar o preço do FII
-
+        # Salva totais do order book do dia (antes de limpar)
+        self.total_compras_dia = sum(
+            o.quantidade for o in self.order_book.ordens_compra.get("FII", [])
+        )
+        self.total_vendas_dia = sum(
+            o.quantidade for o in self.order_book.ordens_venda.get("FII", [])
+        )
+        self.dividendo_dia = self.fii.historico_dividendos[-1] if self.dia_atual % self.dividendos_frequencia == 0 else 0.0
         # 9. Atualizar histórico de preços do FII (já feito na execução de ordens)
         # O preço do FII é atualizado dentro de Transacao.executar()
         # Adiciona o novo preço ao histórico do FII e dos Agentes

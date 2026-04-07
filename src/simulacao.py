@@ -293,6 +293,7 @@ def simular_mercado_streaming(parametros_sistema, num_dias, overrides=None, seed
         preco = mercado.fii.preco_cota
         historico_precos.append(preco)
 
+
         yield {
             "dia":             dia,
             "preco":           preco,
@@ -300,5 +301,8 @@ def simular_mercado_streaming(parametros_sistema, num_dias, overrides=None, seed
             "volatilidade":    mercado.volatilidade_historica,
             "news":            mercado.news,
             "historico_precos": historico_precos,
+            "total_compras":   mercado.total_compras_dia,
+            "total_vendas":    mercado.total_vendas_dia,
+            "dividendo_dia":   mercado.dividendo_dia,
             "mercado":         mercado,
         }
