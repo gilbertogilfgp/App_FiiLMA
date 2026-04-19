@@ -10,3 +10,4 @@ plotly
 arch
 dash
 dash-bootstrap-components
+gunicorn
