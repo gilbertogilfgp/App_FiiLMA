@@ -230,6 +230,8 @@ def make_cfg_fii(n):
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
            suppress_callback_exceptions=True)
 
+server = app.server 
+
 app.layout = dbc.Container(fluid=True, children=[
     dcc.Interval(id="intervalo", interval=300, n_intervals=0, disabled=True),
     dcc.Store(id="store-tick",   data=0),
