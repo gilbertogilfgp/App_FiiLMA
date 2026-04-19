@@ -1,3 +1,6 @@
+import os
+os.environ["MPLCONFIGDIR"] = "/tmp"
+
 import threading
 import numpy as np
 import plotly.graph_objects as go
